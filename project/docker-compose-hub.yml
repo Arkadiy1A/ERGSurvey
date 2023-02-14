@@ -2,20 +2,34 @@ version: '3'
 
 services:
 
-  front-end-service:
+  front-service:
     image: arkadiyagapov/erg-survey-front:1.0.0
     restart: always
-    ports:
-      - "8080:8080"
     deploy:
       mode: replicated
       replicas: 1
 
-  back-end-service:
+  back-service:
     image: arkadiyagapov/erg-survey-back:1.0.0
     restart: always
-    ports:
-      - "8081:8081"
     deploy:
       mode: replicated
       replicas: 1
+
+  caddy:
+    build:
+      context: ./
+      dockerfile: ./caddy.prod.dockerfile
+    deploy:
+      mode: global
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:

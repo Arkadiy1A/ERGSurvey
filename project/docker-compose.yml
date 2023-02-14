@@ -2,7 +2,7 @@ version: '3'
 
 services:
 
-  front-end-service:
+  front-service:
     build:
       context: ./../front
       dockerfile: ./../front/erg.survey.front.dockerfile
@@ -13,7 +13,7 @@ services:
       mode: replicated
       replicas: 1
 
-  back-end-service:
+  back-service:
     build:
       context: ./../back
       dockerfile: ./../back/erg.survey.back.dockerfile
@@ -23,3 +23,21 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+
+  caddy:
+    build:
+      context: ./
+      dockerfile: ./caddy.dockerfile
+    deploy:
+      mode: global
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:

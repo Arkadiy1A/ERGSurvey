@@ -35,7 +35,7 @@ down:
 	docker-compose down
 	@echo "Done!"
 
-docker_deploy_all: docker_deploy_front docker_deploy_back
+docker_deploy_all: docker_deploy_front docker_deploy_back docker_deploy_caddy
 
 docker_deploy_front: build_front
 	cd ../front && docker build -f erg.survey.front.dockerfile -t arkadiyagapov/erg-survey-front:1.0.0 .
@@ -44,3 +44,7 @@ docker_deploy_front: build_front
 docker_deploy_back: build_back
 	cd ../back && docker build -f erg.survey.back.dockerfile -t arkadiyagapov/erg-survey-back:1.0.0 .
 	docker push arkadiyagapov/erg-survey-back:1.0.0
+
+docker_deploy_caddy:
+	cd ../project && docker build -f caddy.dockerfile -t arkadiyagapov/erg-survey-caddy:1.0.0 .
+	docker push arkadiyagapov/erg-survey-caddy:1.0.0
