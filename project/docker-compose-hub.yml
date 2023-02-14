@@ -3,7 +3,7 @@ version: '3'
 services:
 
   front-service:
-    image: arkadiyagapov/erg-survey-front:1.0.0.0
+    image: arkadiyagapov/erg-survey-front:1.0.0
     restart: always
     deploy:
       mode: replicated
@@ -12,7 +12,7 @@ services:
       - "80:8080"
 
   back-service:
-    image: arkadiyagapov/erg-survey-back:1.0.0.0
+    image: arkadiyagapov/erg-survey-back:1.0.0
     restart: always
     deploy:
       mode: replicated
