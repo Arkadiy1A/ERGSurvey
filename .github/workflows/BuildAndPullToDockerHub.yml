@@ -69,8 +69,8 @@ jobs:
       - name: Deploy application
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST_LING_1 }}
-          username: ${{ secrets.USERNAME_LING_1 }}
+          host: ${{ secrets.HOST_WORKER_1 }}
+          username: ${{ secrets.USERNAME_WORKER_1 }}
           key: ${{ secrets.SSH_PRIVATE_KEY_LING_1 }}
           script: |
             docker compose -f /home/deployer/project/docker-compose-hub.yml down
