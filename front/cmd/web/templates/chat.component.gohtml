@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Chat App</title>
+</head>
+<body>
+<div id="messageContainer"></div>
+<form onsubmit="sendMessage(event)">
+    <input type="text" id="messageInput" />
+    <button type="submit">Send</button>
+</form>
+</body>
+<script>
+    var socket = new WebSocket("ws://localhost:8080/ws");
+    socket.onmessage = function(event) {
+        var messageContainer = document.getElementById("messageContainer");
+        var message = document.createElement("div");
+        message.innerText = event.data;
+        messageContainer.appendChild(message);
+    };
+    function sendMessage(event) {
+        event.preventDefault();
+        var messageInput = document.getElementById("messageInput");
+        socket.send(messageInput.value);
+        messageInput.value = "";
+    }
+</script>
+</html>

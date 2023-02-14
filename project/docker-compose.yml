@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  front-end-service:
+    build:
+      context: ./../front
+      dockerfile: ./../front/erg.survey.front.dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  back-end-service:
+    build:
+      context: ./../back
+      dockerfile: ./../back/erg.survey.back.dockerfile
+    restart: always
+    ports:
+      - "8081:8081"
+    deploy:
+      mode: replicated
+      replicas: 1
