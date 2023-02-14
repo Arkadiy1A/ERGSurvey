@@ -9,16 +9,21 @@
     </head>
 
     <body>
-        <div class="container">
-            <p>{{.Description}}</p>
-            <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Ответ на вопрос "{{.Description}}"</th>
+                    <th scope="col">Популярность</th>
+                </tr>
+            </thead>
+            <tbody>
                 {{range $i, $option := .Options}}
-                    <div class="row">
-                        <div class="col">{{$option.Name}}</div>
-                        <div class="col">{{$option.Count}}</div>
-                    </div>
+                <tr>
+                    <td>{{$option.Name}}</td>
+                    <td>{{$option.Count}}</td>
+                <tr>
                 {{end}}
-            </div>
-        </div>
+            </tbody>
+        </table>
     </body>
 </html>

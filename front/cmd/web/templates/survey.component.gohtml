@@ -5,14 +5,12 @@
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{.Description}}</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    </head>
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">    </head>
     <body>
-        <p>{{.Description}}</p>
-        <div class="container">
+        <div class="container mt-5">
+            <h1 class="text-center mb-3">{{.Description}}</h1>
             {{range $i, $option := .Options}}
-                <div class="btn btn-outline-secondary" onclick="sendSurveyResponse({{$i}})">{{$option.Name}}</div><br>
+            <button type="button" class="btn btn-outline-secondary btn-lg col-12" onclick="sendSurveyResponse({{$i}})">{{$option.Name}}</button><br><br>
             {{end}}
         </div>
         <script>
@@ -27,17 +25,17 @@
                         mode: 'no-cors'
                     },
                 })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.error) {
-                        console.log(data.message);
-                    } else {
-                        console.log(data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.error) {
+                            console.log(data.message);
+                        } else {
+                            console.log(data.message);
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
             }
         </script>
     </body>

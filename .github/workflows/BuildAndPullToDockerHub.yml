@@ -23,9 +23,9 @@ jobs:
       - name: Build frontApp application
         run: cd front && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./cmd/web
       - name: Build frontApp Docker image
-        run: cd front && docker build -t arkadiyagapov/erg-survey-front:1.0.12 . -f erg.survey.front.dockerfile
+        run: cd front && docker build -t arkadiyagapov/erg-survey-front:1.0.13 . -f erg.survey.front.dockerfile
       - name: Push frontApp to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-front:1.0.12
+        run: docker push arkadiyagapov/erg-survey-front:1.0.13
 
   buildBackApp:
     runs-on: ubuntu-latest
