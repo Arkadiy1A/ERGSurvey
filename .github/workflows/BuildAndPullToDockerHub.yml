@@ -69,7 +69,7 @@ jobs:
       - name: Build Caddy Docker image
         run: cd project && docker build -t arkadiyagapov/erg-survey-caddy:1.0.13 . -f caddy.prod.dockerfile
       - name: Push Caddy to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-caddy:1.0.13
+        run: docker push arkadiyagapov/erg-survey-caddy:1.0.14
 
   deploy:
     needs: [buildFrontApp, buildBackApp, buildCaddy]
