@@ -21,7 +21,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build frontApp application
-        run: cd front-end && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./cmd/web
+        run: cd front && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./cmd/web
       - name: Build frontApp Docker image
         run: cd front && docker build -t arkadiyagapov/erg-survey-front:latest . -f erg.survey.front.dockerfile
       - name: Push frontApp to DockerHUB
@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build frontApp application
-        run: cd front-end && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./cmd/web
+        run: cd back && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./app
       - name: Build frontApp Docker image
         run: cd back && docker build -t arkadiyagapov/erg-survey-back:latest . -f erg.survey.back.dockerfile
       - name: Push frontApp to DockerHUB
