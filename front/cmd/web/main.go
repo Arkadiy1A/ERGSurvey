@@ -33,11 +33,11 @@ func main() {
 	port := "8080"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/survey.component.gohtml", nil)
+		renderQuestion(w, "templates/survey.component.gohtml", getLatestSurveyData())
 	})
 
 	http.HandleFunc("/table", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/table.component.gohtml", nil)
+		renderQuestion(w, "templates/table.component.gohtml", getLatestSurveyData())
 	})
 
 	fmt.Printf("Starting survey frontend on port %s\n", port)
