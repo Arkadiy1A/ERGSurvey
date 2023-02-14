@@ -27,5 +27,6 @@ erg.digital {
 
     reverse_proxy /latest/* back-service:8081/latest
     reverse_proxy /submit/* back-service:8081/submit
+    reverse_proxy /table/* front-service:8080/table
     reverse_proxy / front-service:8080
 }
