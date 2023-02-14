@@ -30,7 +30,6 @@ func getLatestSurveyData() *survey.Question {
 }
 
 func main() {
-	//port := os.Getenv("ROOT_URL")
 	port := "8080"
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
