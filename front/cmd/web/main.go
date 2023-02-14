@@ -11,7 +11,7 @@ import (
 
 func getLatestSurveyData() *survey.Question {
 	// Make the GET request
-	resp, err := http.Get("https://back.erg.digital/latest")
+	resp, err := http.Get("https://back-service:8081/latest")
 	if err != nil {
 		fmt.Printf("failed to make the GET request: %v", err)
 	}

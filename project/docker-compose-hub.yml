@@ -3,16 +3,16 @@ version: '3'
 services:
 
   front-service:
-    image: arkadiyagapov/erg-survey-front:1.0.2
+    image: arkadiyagapov/erg-survey-front:1.0.3
     restart: always
     deploy:
       mode: replicated
       replicas: 1
     ports:
-      - "80:8080"
+      - "8080:8080"
 
   back-service:
-    image: arkadiyagapov/erg-survey-back:1.0.2
+    image: arkadiyagapov/erg-survey-back:1.0.3
     restart: always
     deploy:
       mode: replicated
@@ -21,12 +21,12 @@ services:
       - "8081:8081"
 
   caddy:
-    image: arkadiyagapov/erg-survey-caddy:1.0.2
+    image: arkadiyagapov/erg-survey-caddy:1.0.3
     deploy:
       mode: global
     ports:
-      - "8090:80"
-      - "44390:443"
+      - "80:80"
+      - "443:443"
     volumes:
       - caddy_data:/data
       - caddy_config:/config
