@@ -12,12 +12,12 @@
         <p>{{.Description}}</p>
         <div class="container">
             {{range $i, $option := .Options}}
-                <div class="btn btn-outline-secondary" name="{{$option.Name}}" value="{{$i}}" onclick="sendSurveyResponse({{$i}})">{{$option.Name}}</div><br>
+                <div class="btn btn-outline-secondary" onclick="sendSurveyResponse({{$i}})">{{$option.Name}}</div><br>
             {{end}}
         </div>
         <script>
             function sendSurveyResponse(Id) {
-                fetch('https://back.erg.digital/submit', {
+                fetch('https://erg.digital/back/submit', {
                     method: 'POST',
                     body: JSON.stringify({
                         Id: Id,
