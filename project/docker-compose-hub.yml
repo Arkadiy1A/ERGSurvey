@@ -3,7 +3,7 @@ version: '3'
 services:
 
   front-service:
-    image: arkadiyagapov/erg-survey-front:1.0.8
+    image: arkadiyagapov/erg-survey-front:1.0.9
     restart: always
     deploy:
       mode: replicated
@@ -21,7 +21,7 @@ services:
       - "8081:8081"
 
   caddy:
-    image: arkadiyagapov/erg-survey-caddy:1.0.11
+    image: arkadiyagapov/erg-survey-caddy:1.0.12
     deploy:
       mode: global
     ports:
