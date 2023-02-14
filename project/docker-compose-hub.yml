@@ -21,7 +21,7 @@ services:
       - "8081:8081"
 
   caddy:
-    image: arkadiyagapov/erg-survey-caddy:1.0.7
+    image: arkadiyagapov/erg-survey-caddy:1.0.8
     deploy:
       mode: global
     ports:
