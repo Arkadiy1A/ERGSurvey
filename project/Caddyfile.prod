@@ -25,9 +25,9 @@ front.erg.digital {
 	encode zstd gzip
 	import static
 
-	reverse_proxy  http://front-service
+	reverse_proxy  http://front-service:8080
 }
 
 back.erg.digital {
-	reverse_proxy http://back-service
+	reverse_proxy http://back-service:8081
 }
