@@ -8,6 +8,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    ports:
+      - "8080:8080"
 
   back-service:
     image: arkadiyagapov/erg-survey-back:1.0.0
@@ -15,6 +17,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    ports:
+      - "8081:8081"
 
   caddy:
     image: arkadiyagapov/erg-survey-caddy:1.0.0

@@ -14,7 +14,7 @@ func main() {
 	port := "8080"
 
 	// Make the GET request
-	resp, err := http.Get("http://back-service/latest")
+	resp, err := http.Get("http://back-service:8081/latest")
 	if err != nil {
 		fmt.Printf("failed to make the GET request: %v", err)
 	}
