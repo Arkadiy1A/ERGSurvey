@@ -17,9 +17,7 @@ services:
       replicas: 1
 
   caddy:
-    build:
-      context: ./
-      dockerfile: ./caddy.prod.dockerfile
+    image: arkadiyagapov/erg-survey-caddy:1.0.0
     deploy:
       mode: global
     ports:

@@ -72,7 +72,7 @@ jobs:
         run: docker push arkadiyagapov/erg-survey-caddy:latest
 
   deploy:
-    needs: [buildFrontApp, buildBackApp]
+    needs: [buildFrontApp, buildBackApp, buildCaddy]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
