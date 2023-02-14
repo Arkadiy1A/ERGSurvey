@@ -17,7 +17,10 @@ func main() {
 		if r.Method == http.MethodPost {
 			fmt.Printf("Method submit has been called\n")
 			res := &survey.ResponsePayload{}
-			readJSON(w, r, res)
+			err := readJSON(w, r, res)
+			if err != nil {
+				fmt.Printf("Falsed to parse JSON: %v\n", err)
+			}
 			surv.Increment(res.Id)
 		}
 	})

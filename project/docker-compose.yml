@@ -23,21 +23,3 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
-  caddy:
-    build:
-      context: ./
-      dockerfile: ./caddy.dockerfile
-    deploy:
-      mode: global
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - caddy_data:/data
-      - caddy_config:/config
-
-volumes:
-  caddy_data:
-    external: true
-  caddy_config:
