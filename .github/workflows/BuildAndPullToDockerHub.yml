@@ -67,9 +67,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build Caddy Docker image
-        run: cd project && docker build -t arkadiyagapov/erg-survey-caddy:1.0.9 . -f caddy.prod.dockerfile
+        run: cd project && docker build -t arkadiyagapov/erg-survey-caddy:1.0.10 . -f caddy.prod.dockerfile
       - name: Push Caddy to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-caddy:1.0.9
+        run: docker push arkadiyagapov/erg-survey-caddy:1.0.10
 
   deploy:
     needs: [buildFrontApp, buildBackApp, buildCaddy]
