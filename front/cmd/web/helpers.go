@@ -3,7 +3,10 @@ package main
 import (
 	"ERGSurvey/back/app/survey"
 	"embed"
+	"encoding/json"
+	"errors"
 	"html/template"
+	"io"
 	"net/http"
 )
 
@@ -21,4 +24,24 @@ func renderQuestion(w http.ResponseWriter, t string, question *survey.Question) 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+// readJSON tries to read the body of a request and converts it into JSON
+func readJSON(w http.ResponseWriter, r *http.Request, data any) error {
+	maxBytes := 1048576 // one megabyte
+
+	r.Body = http.MaxBytesReader(w, r.Body, int64(maxBytes))
+
+	dec := json.NewDecoder(r.Body)
+	err := dec.Decode(data)
+	if err != nil {
+		return err
+	}
+
+	err = dec.Decode(&struct{}{})
+	if err != io.EOF {
+		return errors.New("body must have only a single JSON value")
+	}
+
+	return nil
 }

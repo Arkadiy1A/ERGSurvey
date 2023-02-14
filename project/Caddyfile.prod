@@ -25,12 +25,5 @@ erg.digital {
 	encode zstd gzip
 	import static
 
-    reverse_proxy {
-        match /api/* {
-            to back-service:8081
-        }
-        match / {
-            front-service:8080
-        }
-    }
+    reverse_proxy front-service:8080
 }

@@ -32,12 +32,37 @@ func getLatestSurveyData() *survey.Question {
 func main() {
 	port := "8080"
 
+	surv := survey.CreateDummySurvey()
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/survey.component.gohtml", getLatestSurveyData())
+		renderQuestion(w, "templates/survey.component.gohtml", surv.LatestQuestion())
 	})
 
 	http.HandleFunc("/table", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/table.component.gohtml", getLatestSurveyData())
+		renderQuestion(w, "templates/table.component.gohtml", surv.LatestQuestion())
+	})
+
+	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			fmt.Printf("Method submit has been called\n")
+			res := &survey.ResponsePayload{}
+			err := readJSON(w, r, res)
+			if err != nil {
+				fmt.Printf("Falsed to parse JSON: %v\n", err)
+			}
+			surv.Increment(res.Id)
+		}
+	})
+
+	http.HandleFunc("/latest", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			fmt.Printf("Method latest has been called\n")
+			data, err := json.Marshal(*surv.LatestQuestion())
+			if err != nil {
+				fmt.Printf("failed to encode the object to JSON: %v", err)
+			}
+			w.Write(data)
+		}
 	})
 
 	fmt.Printf("Starting survey frontend on port %s\n", port)
