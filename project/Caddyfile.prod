@@ -25,8 +25,12 @@ erg.digital {
 	encode zstd gzip
 	import static
 
-    handle /back/* {
-        reverse_proxy http://back-service:8081
+    handle /latest {
+        reverse_proxy http://back-service:8081/latest
+    }
+
+    handle /submit {
+        reverse_proxy http://back-service:8081/submit
     }
 
 	handle {
