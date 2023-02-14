@@ -25,6 +25,10 @@ erg.digital {
 	encode zstd gzip
 	import static
 
-    reverse_proxy /back back-service:8081
-    reverse_proxy /survey front-service:8080
+    reverse_proxy /api/* back-service:8081 {
+      header_upstream Host {host}
+      header_upstream X-Real-IP {remote}
+      header_upstream X-Forwarded-For {remote}
+    }
+    reverse_proxy / front-service:8080
 }
