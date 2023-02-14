@@ -26,5 +26,5 @@ erg.digital {
 	import static
 
     reverse_proxy /back/* back-service:8081
-    reverse_proxy / front-service:8080
+    reverse_proxy /survey/* front-service:8080
 }
