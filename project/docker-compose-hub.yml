@@ -3,9 +3,7 @@ version: '3'
 services:
 
   front-end-service:
-    build:
-      context: ./../front
-      dockerfile: ./../front/erg.survey.front.dockerfile
+    image: arkadiyagapov/erg-survey-front:1.0.0
     restart: always
     ports:
       - "8080:8080"
@@ -14,9 +12,7 @@ services:
       replicas: 1
 
   back-end-service:
-    build:
-      context: ./../back
-      dockerfile: ./../back/erg.survey.back.dockerfile
+    image: arkadiyagapov/erg-survey-back:1.0.0
     restart: always
     ports:
       - "8081:8081"
