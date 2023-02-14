@@ -27,6 +27,17 @@
                         mode: 'no-cors'
                     },
                 })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.error) {
+                        console.log(data.message);
+                    } else {
+                        console.log(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
             }
         </script>
     </body>
