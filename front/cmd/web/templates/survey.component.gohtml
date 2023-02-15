@@ -15,7 +15,7 @@
         </div>
         <script>
             function sendSurveyResponse(Id) {
-                fetch('https://erg.digital/submit', {
+                fetch('http://localhost:8080/submit', {
                     method: 'POST',
                     body: JSON.stringify({
                         Id: Id,

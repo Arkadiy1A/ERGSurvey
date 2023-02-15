@@ -50,7 +50,9 @@ func main() {
 			if err != nil {
 				fmt.Printf("Falsed to parse JSON: %v\n", err)
 			}
-			surv.Increment(res.Id)
+			ip := readUserIP(r)
+			fmt.Printf("Request from: %s\n", ip)
+			surv.Increment(res.Id, ip)
 		}
 	})
 

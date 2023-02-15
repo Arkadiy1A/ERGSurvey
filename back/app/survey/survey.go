@@ -4,6 +4,7 @@ type Survey struct {
 	Id        int
 	Name      string
 	Questions []Question
+	Answers   Answers
 }
 
 type Question struct {
@@ -13,9 +14,14 @@ type Question struct {
 	Counter     int      `json:"counter"`
 }
 
+type Answers struct {
+	IpList map[string]*Option
+}
+
 type Option struct {
 	Name  string `json:"name"`
 	Count int    `json:"count"`
+	//IpList []string `json:"ip_list"`
 }
 
 type Result struct {
@@ -44,11 +50,19 @@ func CreateDummySurvey() Survey {
 				},
 			},
 		},
+		Answers: Answers{IpList: map[string]*Option{}},
 	}
 }
 
-func (survey *Survey) Increment(i int) {
-	(*survey).Questions[0].Options[i].Count++
+func (survey *Survey) Increment(i int, ip string) {
+	if _, ok := (*survey).Answers.IpList[ip]; !ok {
+		(*survey).Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		(*survey).Answers.IpList[ip].Count++
+	} else {
+		(*survey).Answers.IpList[ip].Count--
+		(*survey).Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		(*survey).Answers.IpList[ip].Count++
+	}
 }
 
 func (survey *Survey) LatestQuestion() *Question {

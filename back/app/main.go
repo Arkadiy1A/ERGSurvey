@@ -21,7 +21,7 @@ func main() {
 			if err != nil {
 				fmt.Printf("Falsed to parse JSON: %v\n", err)
 			}
-			surv.Increment(res.Id)
+			surv.Increment(res.Id, "")
 		}
 	})
 
