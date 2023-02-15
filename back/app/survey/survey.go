@@ -4,7 +4,6 @@ type Survey struct {
 	Id        int
 	Name      string
 	Questions []Question
-	Answers   Answers
 }
 
 type Question struct {
@@ -12,6 +11,7 @@ type Question struct {
 	Description string   `json:"description"`
 	Options     []Option `json:"options"`
 	Counter     int      `json:"counter"`
+	Answers     Answers  `json:"answers"`
 }
 
 type Answers struct {
@@ -45,23 +45,23 @@ func CreateDummySurvey() Survey {
 				Options: []Option{
 					{Name: "Сына маминой подруги"},
 					{Name: "Десантникова Турникмена Выходсиловича"},
-					{Name: "Зевса"},
 					{Name: "Рысь"},
 				},
+				Answers: Answers{IpList: map[string]*Option{}},
 			},
 		},
-		Answers: Answers{IpList: map[string]*Option{}},
 	}
 }
 
 func (survey *Survey) Increment(i int, ip string) {
-	if _, ok := (*survey).Answers.IpList[ip]; !ok {
-		(*survey).Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
-		(*survey).Answers.IpList[ip].Count++
+	lastQuestion := (*survey).LatestQuestion()
+	if _, ok := lastQuestion.Answers.IpList[ip]; !ok {
+		lastQuestion.Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		lastQuestion.Answers.IpList[ip].Count++
 	} else {
-		(*survey).Answers.IpList[ip].Count--
-		(*survey).Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
-		(*survey).Answers.IpList[ip].Count++
+		lastQuestion.Answers.IpList[ip].Count--
+		lastQuestion.Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		lastQuestion.Answers.IpList[ip].Count++
 	}
 }
 

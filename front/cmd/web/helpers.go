@@ -26,6 +26,19 @@ func renderQuestion(w http.ResponseWriter, t string, question *survey.Question) 
 	}
 }
 
+func renderAnswers(w http.ResponseWriter, t string, surv survey.Survey) {
+	tmpl, err := template.ParseFS(templateFS, t)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, surv)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 // readJSON tries to read the body of a request and converts it into JSON
 func readJSON(w http.ResponseWriter, r *http.Request, data any) error {
 	maxBytes := 1048576 // one megabyte

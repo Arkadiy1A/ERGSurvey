@@ -21,7 +21,7 @@
 	}
 }
 
-erg.digital {
+survey.erg.digital {
 	encode zstd gzip
 	import static
 

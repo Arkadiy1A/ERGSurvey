@@ -39,7 +39,8 @@ func main() {
 	})
 
 	http.HandleFunc("/table", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/table.component.gohtml", surv.LatestQuestion())
+		fmt.Printf("Questions = %v\n", surv)
+		renderAnswers(w, "templates/table.component.gohtml", surv)
 	})
 
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
