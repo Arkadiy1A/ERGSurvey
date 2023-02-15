@@ -3,7 +3,7 @@ version: '3'
 services:
 
   front-service:
-    image: arkadiyagapov/erg-survey-front:1.0.18
+    image: arkadiyagapov/erg-survey-front:1.0.19
     restart: always
     deploy:
       mode: replicated

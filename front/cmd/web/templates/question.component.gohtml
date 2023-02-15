@@ -9,6 +9,8 @@
     </head>
 
     <body>
+    <div class="card">
+        <div class="card-body">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-default">Вопрос</span>
@@ -40,33 +42,35 @@
             <input id="erg_pin" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
         </div>
         <button type="button" class="btn btn-success" onclick="createNewQuestion()"> Новый вопрос </button>
-        <script>
-            function createNewQuestion() {
-                fetch('https://survey.erg.digital/newQuestion', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        Name: document.getElementById('erg_question_name').value,
-                        Q1: document.getElementById('erg_ans_1').value,
-                        Q2: document.getElementById('erg_ans_2').value,
-                        Q3: document.getElementById('erg_ans_3').value,
-                        Pin: document.getElementById('erg_pin').value,
-                    }),
-                    headers: {
-                        'Content-type': 'application/json; charset=UTF-8',
-                        mode: 'no-cors'
-                    },
-                })
-                .then((data) => {
-                    if (data.error) {
-                        console.log(data.message);
-                    } else {
-                        console.log(data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                })
-            }
-        </script>
+        </div>
+    </div>
+    <script>
+        function createNewQuestion() {
+            fetch('https://survey.erg.digital/newQuestion', {
+                method: 'POST',
+                body: JSON.stringify({
+                    Name: document.getElementById('erg_question_name').value,
+                    Q1: document.getElementById('erg_ans_1').value,
+                    Q2: document.getElementById('erg_ans_2').value,
+                    Q3: document.getElementById('erg_ans_3').value,
+                    Pin: document.getElementById('erg_pin').value,
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                    mode: 'no-cors'
+                },
+            })
+            .then((data) => {
+                if (data.error) {
+                    console.log(data.message);
+                } else {
+                    console.log(data.message);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }
+    </script>
     </body>
 </html>
