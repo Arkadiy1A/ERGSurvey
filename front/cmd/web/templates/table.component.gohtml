@@ -11,12 +11,12 @@
     <body>
         <div class="card">
             <div class="card-body">
-            {{range .Questions}}
+            {{range .Survey.Questions}}
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Ответ на вопрос "{{.Description}}"</th>
-                            <th scope="col">Популярность</th>
+                            <th scope="col">{{.Description}}</th>
+                            <th scope="col">+</th>
                         </tr>
                     </thead>
                     <tbody>
