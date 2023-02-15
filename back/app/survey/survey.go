@@ -51,11 +51,11 @@ func CreateDummySurvey() Survey {
 		Questions: []Question{
 			{
 				Id:          1,
-				Description: "Кого вы видите перед собой?",
+				Description: "Что думаете заявленной теме?",
 				Options: []Option{
-					{Name: "Сына маминой подруги"},
-					{Name: "Десантникова Турникмена Выходсиловича"},
-					{Name: "Рысь"},
+					{Name: "Просто интресено"},
+					{Name: "Это путь в никуда"},
+					{Name: "Это светлое будущее"},
 				},
 				Answers: Answers{IpList: map[string]*Option{}},
 			},

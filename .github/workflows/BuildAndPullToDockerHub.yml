@@ -23,9 +23,9 @@ jobs:
       - name: Build frontApp application
         run: cd front && env GOOS=linux CGO_ENABLED=0 go build -o frontApp ./cmd/web
       - name: Build frontApp Docker image
-        run: cd front && docker build -t arkadiyagapov/erg-survey-front:1.0.19 . -f erg.survey.front.dockerfile
+        run: cd front && docker build -t arkadiyagapov/erg-survey-front:1.0.20 . -f erg.survey.front.dockerfile
       - name: Push frontApp to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-front:1.0.19
+        run: docker push arkadiyagapov/erg-survey-front:1.0.20
 
   buildBackApp:
     runs-on: ubuntu-latest
@@ -46,9 +46,9 @@ jobs:
       - name: Build frontApp application
         run: cd back && env GOOS=linux CGO_ENABLED=0 go build -o backApp ./app
       - name: Build frontApp Docker image
-        run: cd back && docker build -t arkadiyagapov/erg-survey-back:1.0.6 . -f erg.survey.back.dockerfile
+        run: cd back && docker build -t arkadiyagapov/erg-survey-back:1.0.7 . -f erg.survey.back.dockerfile
       - name: Push frontApp to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-back:1.0.6
+        run: docker push arkadiyagapov/erg-survey-back:1.0.7
 
   buildCaddy:
     runs-on: ubuntu-latest
@@ -67,9 +67,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build Caddy Docker image
-        run: cd project && docker build -t arkadiyagapov/erg-survey-caddy:1.0.21 . -f caddy.prod.dockerfile
+        run: cd project && docker build -t arkadiyagapov/erg-survey-caddy:1.0.22 . -f caddy.prod.dockerfile
       - name: Push Caddy to DockerHUB
-        run: docker push arkadiyagapov/erg-survey-caddy:1.0.21
+        run: docker push arkadiyagapov/erg-survey-caddy:1.0.22
 
   deploy:
     needs: [buildFrontApp, buildBackApp, buildCaddy]
