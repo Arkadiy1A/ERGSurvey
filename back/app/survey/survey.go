@@ -51,7 +51,7 @@ func CreateDummySurvey() Survey {
 		Questions: []Question{
 			{
 				Id:          1,
-				Description: "Что думаете заявленной теме?",
+				Description: "Что думаете о заявленной теме?",
 				Options: []Option{
 					{Name: "Просто интресено"},
 					{Name: "Это путь в никуда"},
