@@ -13,6 +13,19 @@ import (
 //go:embed templates
 var templateFS embed.FS
 
+func renderNewQuestion(w http.ResponseWriter, t string) {
+	tmpl, err := template.ParseFS(templateFS, t)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 func renderQuestion(w http.ResponseWriter, t string, question *survey.Question) {
 	tmpl, err := template.ParseFS(templateFS, t)
 	if err != nil {

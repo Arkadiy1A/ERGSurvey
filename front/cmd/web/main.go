@@ -43,6 +43,10 @@ func main() {
 		renderAnswers(w, "templates/table.component.gohtml", surv)
 	})
 
+	http.HandleFunc("/question", func(w http.ResponseWriter, r *http.Request) {
+		renderNewQuestion(w, "templates/question.component.gohtml")
+	})
+
 	http.HandleFunc("/submit", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			fmt.Printf("Method submit has been called\n")
@@ -54,6 +58,21 @@ func main() {
 			ip := readUserIP(r)
 			fmt.Printf("Request from: %s\n", ip)
 			surv.Increment(res.Id, ip)
+		}
+	})
+
+	http.HandleFunc("/newQuestion", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			fmt.Printf("Method submit has been called\n")
+			res := &survey.NewQuestionPayload{}
+			err := readJSON(w, r, res)
+			if err != nil {
+				fmt.Printf("Falsed to parse JSON: %v\n", err)
+			}
+
+			if res.Pin == "31415926" {
+				surv.AddQuestion(res.Name, res.Q1, res.Q2, res.Q3)
+			}
 		}
 	})
 

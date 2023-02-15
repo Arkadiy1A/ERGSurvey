@@ -1,5 +1,7 @@
 package survey
 
+import "fmt"
+
 type Survey struct {
 	Id        int
 	Name      string
@@ -34,6 +36,14 @@ type ResponsePayload struct {
 	Id int
 }
 
+type NewQuestionPayload struct {
+	Name string
+	Q1   string
+	Q2   string
+	Q3   string
+	Pin  string
+}
+
 func CreateDummySurvey() Survey {
 	return Survey{
 		Id:   1,
@@ -53,14 +63,30 @@ func CreateDummySurvey() Survey {
 	}
 }
 
+func (survey *Survey) AddQuestion(name, q1, q2, q3 string) {
+	question := Question{
+		Id:          len((*survey).Questions),
+		Description: name,
+		Options: []Option{
+			{Name: q1},
+			{Name: q2},
+			{Name: q3},
+		},
+		Answers: Answers{IpList: map[string]*Option{}},
+	}
+
+	(*survey).Questions = append((*survey).Questions, question)
+	fmt.Printf("survey = %v\n", *survey)
+}
+
 func (survey *Survey) Increment(i int, ip string) {
 	lastQuestion := (*survey).LatestQuestion()
 	if _, ok := lastQuestion.Answers.IpList[ip]; !ok {
-		lastQuestion.Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		lastQuestion.Answers.IpList[ip] = &lastQuestion.Options[i]
 		lastQuestion.Answers.IpList[ip].Count++
 	} else {
 		lastQuestion.Answers.IpList[ip].Count--
-		lastQuestion.Answers.IpList[ip] = &(*survey).Questions[0].Options[i]
+		lastQuestion.Answers.IpList[ip] = &lastQuestion.Options[i]
 		lastQuestion.Answers.IpList[ip].Count++
 	}
 }
