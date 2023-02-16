@@ -46,7 +46,7 @@
 </div>
 <script>
     function createNewQuestion() {
-        fetch('http://localhost:8080/newQuestion', {
+        fetch('https://survey.erg.digital/newQuestion', {
             method: 'POST',
             body: JSON.stringify({
                 Name: document.getElementById('erg_question_name').value,
