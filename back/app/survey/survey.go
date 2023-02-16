@@ -56,9 +56,99 @@ func CreateDummySurvey() Survey {
 				Id:          1,
 				Description: "Что думаете о заявленной теме?",
 				Options: []Option{
-					{Name: "Просто интресено"},
+					{Name: "Просто интересно"},
 					{Name: "Это путь в никуда"},
 					{Name: "Это светлое будущее"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          2,
+				Description: "Пользуетесь облаками?",
+				Options: []Option{
+					{Name: "Постоянно"},
+					{Name: "Пару раз"},
+					{Name: "Никогда"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          3,
+				Description: "С какими моделями сервисов сталкивались?",
+				Options: []Option{
+					{Name: "SaaS"},
+					{Name: "PaaS"},
+					{Name: "IaaS"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          4,
+				Description: "Как вы думаете насколько вы пользуетесь ПО на микросервисах?",
+				Options: []Option{
+					{Name: "Никогда"},
+					{Name: "Все время"},
+					{Name: "Пару раз в год"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          5,
+				Description: "Можно запустить людей в космос по скраму?",
+				Options: []Option{
+					{Name: "Конечно нет, у вас же своих двигателей нет даже"},
+					{Name: "Уже запустили"},
+					{Name: "О чем речь?"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          6,
+				Description: "Сможете прожить без FOSS?",
+				Options: []Option{
+					{Name: "Предки выживали и мы выживем"},
+					{Name: "Пути назад нет"},
+					{Name: "А зачем?"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          6,
+				Description: "Сможете прожить без FOSS?",
+				Options: []Option{
+					{Name: "Предки выживали и мы выживем"},
+					{Name: "Пути назад нет"},
+					{Name: "А зачем?"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          7,
+				Description: "Хотите стать элитой?",
+				Options: []Option{
+					{Name: "Уже стали"},
+					{Name: "Конечно"},
+					{Name: "Не мое"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          8,
+				Description: "Вселенная стала понятнее?",
+				Options: []Option{
+					{Name: "Намного"},
+					{Name: "Слегка"},
+					{Name: "Совсем нет"},
+				},
+				Answers: Answers{IpList: map[string]*Option{}},
+			},
+			{
+				Id:          9,
+				Description: "О чем интересно послушать в следующий раз?",
+				Options: []Option{
+					{Name: "Про ифнраструктуру"},
+					{Name: "Про разработку"},
+					{Name: "Про будущее"},
 				},
 				Answers: Answers{IpList: map[string]*Option{}},
 			},
