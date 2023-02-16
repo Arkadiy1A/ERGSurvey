@@ -84,7 +84,7 @@ func CreateDummySurvey() Survey {
 			},
 			{
 				Id:          4,
-				Description: "Как вы думаете насколько вы пользуетесь ПО на микросервисах?",
+				Description: "Как вы думаете, насколько часто вы пользуетесь ПО на микросервисах?",
 				Options: []Option{
 					{Name: "Никогда"},
 					{Name: "Все время"},
@@ -96,7 +96,7 @@ func CreateDummySurvey() Survey {
 				Id:          5,
 				Description: "Можно запустить людей в космос по скраму?",
 				Options: []Option{
-					{Name: "Конечно нет, у вас же своих двигателей нет даже"},
+					{Name: "Конечно нет, у них даже двигателей своих нет"},
 					{Name: "Уже запустили"},
 					{Name: "О чем речь?"},
 				},
@@ -106,17 +106,7 @@ func CreateDummySurvey() Survey {
 				Id:          6,
 				Description: "Сможете прожить без FOSS?",
 				Options: []Option{
-					{Name: "Предки выживали и мы выживем"},
-					{Name: "Пути назад нет"},
-					{Name: "А зачем?"},
-				},
-				Answers: Answers{IpList: map[string]*Option{}},
-			},
-			{
-				Id:          6,
-				Description: "Сможете прожить без FOSS?",
-				Options: []Option{
-					{Name: "Предки выживали и мы выживем"},
+					{Name: "Предки выживали, и мы выживем"},
 					{Name: "Пути назад нет"},
 					{Name: "А зачем?"},
 				},
