@@ -28,7 +28,7 @@ func main() {
 	http.HandleFunc("/latest", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			fmt.Printf("Method latest has been called\n")
-			data, err := json.Marshal(*surv.LatestQuestion())
+			data, err := json.Marshal(*surv.CurrentQuestion())
 			if err != nil {
 				fmt.Printf("failed to encode the object to JSON: %v", err)
 			}

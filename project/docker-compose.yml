@@ -24,20 +24,6 @@ services:
       mode: replicated
       replicas: 1
 
-  postgres:
-    image: 'postgres:latest'
-    ports:
-      - "5432:5432"
-    restart: always
-    deploy:
-      mode: global
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: users
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-
 volumes:
   postgres_data:
     external: true

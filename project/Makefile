@@ -1,12 +1,19 @@
 FRONT_END_BINARY=frontApp
 BACK_END_BINARY=backApp
+BOARD_END_BINARY=boardApp
 
-build_all: build_front build_back
+build_all: build_front build_back build_front build_board
 
 ## build_front: builds the front end binary
 build_front:
 	@echo "Building front end binary..."
 	cd ../front && env GOOS=linux CGO_ENABLED=0 go build -o ${FRONT_END_BINARY} ./cmd/web
+	@echo "Done!"
+
+## build_board: builds the board end binary
+build_board:
+	@echo "Building front end binary..."
+	cd ../board && env GOOS=linux CGO_ENABLED=0 go build -o ${BOARD_END_BINARY} ./cmd/web
 	@echo "Done!"
 
 ## build_back: builds the back end binary
@@ -35,11 +42,15 @@ down:
 	docker-compose down
 	@echo "Done!"
 
-docker_deploy_all: docker_deploy_front docker_deploy_back docker_deploy_caddy
+docker_deploy_all: docker_deploy_front docker_deploy_back docker_deploy_caddy docker_deploy_board
 
 docker_deploy_front: build_front
 	cd ../front && docker build -f erg.survey.front.dockerfile -t arkadiyagapov/erg-survey-front:1.0.0 .
 	docker push arkadiyagapov/erg-survey-front:1.0.0
+
+docker_deploy_board: build_board
+	cd ../board && docker build -f erg.board.front.dockerfile -t arkadiyagapov/erg-board-front:1.0.0 .
+	docker push arkadiyagapov/erg-board-front:1.0.0
 
 docker_deploy_back: build_back
 	cd ../back && docker build -f erg.survey.back.dockerfile -t arkadiyagapov/erg-survey-back:1.0.0 .

@@ -1,11 +1,14 @@
 package survey
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Survey struct {
 	Id        int
 	Name      string
 	Questions []Question
+	Current   int
 }
 
 type Question struct {
@@ -60,6 +63,7 @@ func CreateDummySurvey() Survey {
 				Answers: Answers{IpList: map[string]*Option{}},
 			},
 		},
+		Current: 0,
 	}
 }
 
@@ -76,11 +80,16 @@ func (survey *Survey) AddQuestion(name, q1, q2, q3 string) {
 	}
 
 	(*survey).Questions = append((*survey).Questions, question)
+	(*survey).Current = len((*survey).Questions) - 1
 	fmt.Printf("survey = %v\n", *survey)
 }
 
+func (survey *Survey) SetQuestion(pos int) {
+	(*survey).Current = pos
+}
+
 func (survey *Survey) Increment(i int, ip string) {
-	lastQuestion := (*survey).LatestQuestion()
+	lastQuestion := (*survey).CurrentQuestion()
 	if _, ok := lastQuestion.Answers.IpList[ip]; !ok {
 		lastQuestion.Answers.IpList[ip] = &lastQuestion.Options[i]
 		lastQuestion.Answers.IpList[ip].Count++
@@ -91,6 +100,6 @@ func (survey *Survey) Increment(i int, ip string) {
 	}
 }
 
-func (survey *Survey) LatestQuestion() *Question {
-	return &(*survey).Questions[len((*survey).Questions)-1]
+func (survey *Survey) CurrentQuestion() *Question {
+	return &(*survey).Questions[(*survey).Current]
 }

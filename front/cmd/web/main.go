@@ -2,32 +2,12 @@ package main
 
 import (
 	"ERGSurvey/back/app/survey"
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
-
-func getLatestSurveyData() *survey.Question {
-	// Make the GET request
-	resp, err := http.Get("http://back-service:8081/latest")
-	if err != nil {
-		fmt.Printf("failed to make the GET request: %v", err)
-	}
-	defer resp.Body.Close()
-
-	// Read the response body
-	reader := bufio.NewReader(resp.Body)
-	decoder := json.NewDecoder(reader)
-	var question survey.Question
-	err = decoder.Decode(&question)
-	if err != nil {
-		fmt.Printf("failed to unmarshal the response body: %v", err)
-	}
-
-	return &question
-}
 
 func main() {
 	port := "8080"
@@ -35,7 +15,7 @@ func main() {
 	surv := survey.CreateDummySurvey()
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		renderQuestion(w, "templates/survey.component.gohtml", surv.LatestQuestion())
+		renderQuestion(w, "templates/survey.component.gohtml", surv.CurrentQuestion())
 	})
 
 	http.HandleFunc("/table", func(w http.ResponseWriter, r *http.Request) {
@@ -79,11 +59,28 @@ func main() {
 	http.HandleFunc("/latest", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
 			fmt.Printf("Method latest has been called\n")
-			data, err := json.Marshal(*surv.LatestQuestion())
+			data, err := json.Marshal(*surv.CurrentQuestion())
 			if err != nil {
 				fmt.Printf("failed to encode the object to JSON: %v", err)
 			}
 			w.Write(data)
+		}
+	})
+
+	http.HandleFunc("/setQuestion", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodGet {
+			// Get the query parameters from the request
+			params := r.URL.Query()
+
+			// Get the "name" parameter value and print it
+			pin := params.Get("pin")
+			num := params.Get("num")
+			//fmt.Printf("Name parameter value is: %s\n", name)
+
+			if pin == "31415926" {
+				numInt, _ := strconv.Atoi(num)
+				surv.SetQuestion(numInt)
+			}
 		}
 	})
 

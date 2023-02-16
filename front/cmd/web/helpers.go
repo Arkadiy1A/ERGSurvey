@@ -2,6 +2,7 @@ package main
 
 import (
 	"ERGSurvey/back/app/survey"
+	"ERGSurvey/board/anonimousboard"
 	"embed"
 	"encoding/json"
 	"errors"
@@ -12,6 +13,19 @@ import (
 
 //go:embed templates
 var templateFS embed.FS
+
+func renderBoard(w http.ResponseWriter, t string, board anonimousboard.AnonBoard) {
+	tmpl, err := template.ParseFS(templateFS, t)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	err = tmpl.Execute(w, board)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
 
 func renderNewQuestion(w http.ResponseWriter, t string) {
 	tmpl, err := template.ParseFS(templateFS, t)
