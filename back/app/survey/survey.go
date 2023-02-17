@@ -94,7 +94,7 @@ func CreateDummySurvey() Survey {
 			},
 			{
 				Id:          5,
-				Description: "Можно запустить людей в космос по скраму?",
+				Description: "Можно запустить людей в космос по AGILE?",
 				Options: []Option{
 					{Name: "Конечно нет, у них даже двигателей своих нет"},
 					{Name: "Уже запустили"},
